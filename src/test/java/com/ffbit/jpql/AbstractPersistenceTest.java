@@ -10,11 +10,11 @@ import org.junit.BeforeClass;
 
 public abstract class AbstractPersistenceTest {
     
-    private EntityManagerFactory emf;
-    private EntityManager em;
+    protected static EntityManagerFactory emf;
+    protected EntityManager em;
     
     @BeforeClass
-    public void setUpClass() {
+    public static void setUpClass() {
         emf = Persistence.createEntityManagerFactory("test");
     }
     
@@ -31,7 +31,7 @@ public abstract class AbstractPersistenceTest {
     }
     
     @AfterClass
-    public void tearDownClass() {
+    public static void tearDownClass() {
         emf.close();
     }
     
