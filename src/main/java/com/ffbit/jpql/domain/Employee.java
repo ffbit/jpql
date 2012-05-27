@@ -9,6 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Represents the Employee domain entity.
+ * @author ffbit
+ */
+
 @Entity
 @Table(name = "EMPLOYEES")
 @Access(AccessType.PROPERTY)
@@ -18,6 +23,23 @@ public class Employee {
     private String name;
     private double salary;
     
+    /**
+     * The default non-arguments constructor regarding to JPA requirements
+     */
+    protected Employee() {
+        
+    }
+    
+    /**
+     * A constructor created for handy usage.
+     * @param name Employee's name
+     * @param salary Employee's salary
+     */
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
