@@ -6,20 +6,29 @@ import java.util.List;
 
 import javax.persistence.TypedQuery;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.ffbit.jpql.AbstractPersistenceTest;
 
 public class EmployeeJpqlTest extends AbstractPersistenceTest {
+    
+    private Employee john;
+    private Employee jack;
+    
+    @Before
+    public void setUp() {
+        super.setUp();
+        
+        john = new Employee("John Doe", 1000);
+        jack = new Employee("Jack Line", 1010);
+        
+        em.persist(john);
+        em.persist(jack);
+    }
 
     @Test
     public void itShouldRetrieveAllEmplloyees() {
-        Employee john = new Employee("John Doe", 1000);
-        Employee jack = new Employee("Jack Line", 1010);
-
-        em.persist(john);
-        em.persist(jack);
-
         TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e",
                 Employee.class);
         List<Employee> employees = query.getResultList();
@@ -29,12 +38,6 @@ public class EmployeeJpqlTest extends AbstractPersistenceTest {
 
     @Test
     public void itShoulRetrieveAllEmployeeNames() {
-        Employee john = new Employee("John Doe", 1000);
-        Employee jack = new Employee("Jack Line", 1010);
-
-        em.persist(john);
-        em.persist(jack);
-
         TypedQuery<String> query = em.createQuery(
                 "SELECT e.name FROM Employee e", String.class);
         List<String> names = query.getResultList();
